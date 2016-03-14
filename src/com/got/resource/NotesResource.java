@@ -31,14 +31,15 @@ public class NotesResource {
 	@Autowired
 	private UserService userService;
 	
-	User user = null;
+	@Autowired
+	private User user;
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response addNote(Notes note){
-	    user = note.getNotesUser();
-		user = userService.checkUser(user);
+	   
+		
 		note.setNotesUser(user);
 		notesService.addNote(note);
 		
@@ -52,12 +53,8 @@ public class NotesResource {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getNotesForUser(@HeaderParam("emailid") String emailId,@HeaderParam("password")String password){
+	public Response getNotesForUser(){
 		List<Notes> notes = null;
-		user = new User();
-		user.setEmailId(emailId);
-		user.setPassword(password);
-		user= userService.checkUser(user);
 		
 			
 			notes = notesService.getNotesForUser(user);
@@ -86,6 +83,16 @@ public class NotesResource {
 
 	public void setUserService(UserService userService) {
 		this.userService = userService;
+	}
+
+
+	public User getUser() {
+		return user;
+	}
+
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 	

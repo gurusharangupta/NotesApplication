@@ -11,9 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-
+@Component
 @Entity
 @Table(name="USER_DETAILS")
 public class User {

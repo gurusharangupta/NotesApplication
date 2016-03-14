@@ -25,6 +25,9 @@ public class SecurityFilter implements ContainerRequestFilter,AppllcationConstan
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private User user;
+	
 	@Override
 	public void filter(ContainerRequestContext requestContext) throws IOException {
 	
@@ -37,7 +40,7 @@ public class SecurityFilter implements ContainerRequestFilter,AppllcationConstan
 			String username = tokenizer.nextToken();
 			String password = tokenizer.nextToken();
 			
-			User user = new User();
+			
 			user.setEmailId(username);
 			user.setPassword(password);
 			userService.checkUser(user);
@@ -59,6 +62,14 @@ public class SecurityFilter implements ContainerRequestFilter,AppllcationConstan
 
 	public void setUserService(UserService userService) {
 		this.userService = userService;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }
