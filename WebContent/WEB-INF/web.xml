@@ -3,10 +3,58 @@
   <display-name>NotesApplication</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
+   
   </welcome-file-list>
+  
+    
+        <!-- Spring Context Configuration' s Path definition -->
+      <context-param>
+         <param-name>contextConfigLocation</param-name>
+         <param-value>
+            /WEB-INF/applicationContext.xml
+         </param-value>
+      </context-param>
+       
+      <!-- The Bootstrap listener to start up and shut down Spring's root WebApplicationContext. It is registered to Servlet Container -->
+      <listener>
+        <listener-class>
+            org.springframework.web.context.ContextLoaderListener
+        </listener-class>
+      </listener>
+      <listener>
+        <listener-class>
+            org.springframework.web.context.request.RequestContextListener
+        </listener-class>
+      </listener>
+      
+      <!-- Project Stage Level -->
+      <context-param>
+        <param-name>javax.faces.PROJECT_STAGE</param-name>
+        <param-value>Development</param-value>
+      </context-param>
+       
+
+       
+    
+  <!-- Spring-Jersey mapping -->
+		<servlet>
+		<servlet-name>jersey-serlvet</servlet-name>
+		<servlet-class>
+			org.glassfish.jersey.servlet.ServletContainer
+		</servlet-class>
+		<init-param>
+			<param-name>
+           jersey.config.server.provider.packages
+            </param-name>
+			<param-value>com.got.resource
+			</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>jersey-serlvet</servlet-name>
+		<url-pattern>/rest/*</url-pattern>
+	</servlet-mapping>
+	
 </web-app>
