@@ -46,7 +46,7 @@
 			<param-name>
            jersey.config.server.provider.packages
             </param-name>
-			<param-value>com.got.resource,com.got.exception
+			<param-value>com.got.resource,com.got.exception,com.got.security
 			</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>

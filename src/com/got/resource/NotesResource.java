@@ -1,8 +1,11 @@
 package com.got.resource;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -44,9 +47,27 @@ public class NotesResource {
 				.build();
 		
 		
-		
-		
 	}
+	
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getNotesForUser(@HeaderParam("emailid") String emailId,@HeaderParam("password")String password){
+		List<Notes> notes = null;
+		user = new User();
+		user.setEmailId(emailId);
+		user.setPassword(password);
+		user= userService.checkUser(user);
+		
+			
+			notes = notesService.getNotesForUser(user);
+			return	Response.status(Status.FOUND)
+			.entity(notes)
+			.build();
+		
+			
+			
+		}
 	
 
 	public NotesService getNotesService() {

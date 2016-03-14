@@ -2,6 +2,7 @@ package com.got.daoImpl;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.got.constant.AppllcationConstant;
 import com.got.dao.NotesDao;
+import com.got.exception.DataNotFoundException;
 import com.got.model.Notes;
 import com.got.model.User;
 
@@ -51,8 +53,14 @@ public class NotesDaoImpl implements NotesDao,AppllcationConstant{
 
 	@Override
 	public List<Notes> getNotesForUser(User user) {
-		// TODO Auto-generated method stub
-		return null;
+		@SuppressWarnings("unchecked")
+		Query query =  getSessionFactory().getCurrentSession().createQuery("from Notes where notesUser = ?");
+		query.setEntity(0, user);
+		List<Notes> notesList = (List<Notes>)query.list();
+		if(notesList.isEmpty()){
+			throw new DataNotFoundException(NOTE_NOT_FOUND);
+		}
+	return notesList;
 	}
 
 	

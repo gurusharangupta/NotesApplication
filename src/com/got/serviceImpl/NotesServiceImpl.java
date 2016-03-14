@@ -50,8 +50,7 @@ public class NotesServiceImpl implements NotesService{
 
 	@Override
 	public List<Notes> getNotesForUser(User user) {
-		// TODO Auto-generated method stub
-		return null;
+		return notesDao.getNotesForUser(user);
 	}
 	
 	
