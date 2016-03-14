@@ -18,7 +18,6 @@ public class NotesResource {
 	public String addNote(){
 		
 		
-		
 		return null;
 		
 		
