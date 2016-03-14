@@ -35,6 +35,11 @@ public class UserServiceImpl implements UserService,AppllcationConstant{
 			throw new DataNotFoundException(USER_NOT_FOUND);
 		}
 	}
+	
+	public void updateTimeForUser(User user){
+		
+		
+	}
 
 
 	public UserDao getUserDao() {

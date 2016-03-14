@@ -28,7 +28,7 @@ private SessionFactory sessionFactory;
 	
 	@Override
 	public User checkUser(User user) {
-		Query query =  getSessionFactory().getCurrentSession().createQuery("from User where userEmailId=?");
+		Query query =  getSessionFactory().getCurrentSession().createQuery("from User where emailId=?");
 		query.setString(0, user.getEmailId());
 		 List<User> list =  query.list();
 		 if(!list.isEmpty()){
@@ -36,6 +36,12 @@ private SessionFactory sessionFactory;
 		 }else{
 			 return null;
 		 }
+		
+	}
+	
+	@Override
+	public void updateTimeForUser(User user){
+		
 		
 	}
 	
