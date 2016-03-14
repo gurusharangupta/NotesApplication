@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name="NOTES")
 public class Notes {
@@ -49,6 +51,7 @@ public class Notes {
 	}
 	@ManyToOne
 	@JoinColumn(name="USER_EMAIL_ID")
+	@JsonBackReference
 	public User getNotesUser() {
 		return notesUser;
 	}

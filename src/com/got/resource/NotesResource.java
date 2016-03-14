@@ -7,6 +7,8 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -26,18 +28,21 @@ public class NotesResource {
 	@Autowired
 	private UserService userService;
 	
+	User user = null;
+	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.TEXT_PLAIN)
-	public String addNote(Notes note){
-		User user = note.getNotesUser();
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response addNote(Notes note){
+	    user = note.getNotesUser();
 		user = userService.checkUser(user);
-		Date date = new Date();
-		user.setUpdateTime(date);
-		note.setCreateTime(date);
-		note.setUpdateTime(date);
 		note.setNotesUser(user);
-		return notesService.addNote(note);
+		notesService.addNote(note);
+		
+		return	Response.status(Status.CREATED)
+				.entity(note)
+				.build();
+		
 		
 		
 		
