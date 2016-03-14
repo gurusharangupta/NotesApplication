@@ -7,13 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.got.constant.AppllcationConstant;
 import com.got.dao.NotesDao;
 import com.got.model.Notes;
 import com.got.model.User;
 
 @Repository
 @Transactional
-public class NotesDaoImpl implements NotesDao{
+public class NotesDaoImpl implements NotesDao,AppllcationConstant{
 
 	
 	private SessionFactory sessionFactory;
@@ -27,8 +28,10 @@ public class NotesDaoImpl implements NotesDao{
 	
 	@Override
 	public String addNote(Notes note) {
-		// TODO Auto-generated method stub
-		return null;
+	
+		getSessionFactory().getCurrentSession().save(note);
+		
+		return NOTE_SAVE_SUCCESSFUL;
 	}
 
 

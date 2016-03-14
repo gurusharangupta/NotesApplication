@@ -26,8 +26,8 @@ public class NotesServiceImpl implements NotesService{
 	
 	@Override
 	public String addNote(Notes note) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return notesDao.addNote(note);
 	}
 
 	@Override
