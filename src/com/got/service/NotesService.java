@@ -1,5 +1,14 @@
 package com.got.service;
 
-public class NotesService {
+import java.util.List;
 
+import com.got.model.Notes;
+
+public interface NotesService {
+
+	public String addNote();
+	public String updateNote();
+	public String deleteNote();
+	public List<Notes> getNotesForUser();
+	
 }
