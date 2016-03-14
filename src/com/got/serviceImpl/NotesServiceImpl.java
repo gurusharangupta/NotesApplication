@@ -45,8 +45,7 @@ public class NotesServiceImpl implements NotesService{
 
 	@Override
 	public String deleteNote(Notes note) {
-		// TODO Auto-generated method stub
-		return null;
+		return notesDao.deleteNote(note);
 	}
 
 	@Override

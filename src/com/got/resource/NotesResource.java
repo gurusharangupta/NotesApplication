@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
@@ -73,6 +74,22 @@ public class NotesResource {
 	public Response updateNote(Notes note){
 		note.setNotesUser(user);
 		notesService.updateNote(note);
+			
+			return	Response.status(Status.OK)
+			.entity(note)
+			.build();
+		
+			
+			
+		}
+	
+	
+	@DELETE
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response deleteNote(Notes note){
+		note.setNotesUser(user);
+		notesService.deleteNote(note);
 			
 			return	Response.status(Status.OK)
 			.entity(note)

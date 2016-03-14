@@ -40,9 +40,15 @@ public class NotesDaoImpl implements NotesDao,AppllcationConstant{
 	@Override
 	public String updateNote(Notes note) {
 		Notes userNote = (Notes) getSessionFactory().getCurrentSession().get(Notes.class, note.getId());
+		if(userNote!=null && userNote.getNotesUser().getEmailId().equals(note.getNotesUser().getEmailId())){
 		userNote.setNote(note.getNote());
 		userNote.setTitle(note.getTitle());
 		userNote.setUpdateTime(note.getUpdateTime());
+		}else{
+			
+			throw new DataNotFoundException(NOTE_UPDATE_UNSUCCESSFUL);
+		}
+		
 		
 		return NOTE_UPDATE_SUCCESSFUL;
 	}
@@ -50,8 +56,16 @@ public class NotesDaoImpl implements NotesDao,AppllcationConstant{
 
 	@Override
 	public String deleteNote(Notes note) {
-		// TODO Auto-generated method stub
-		return null;
+		Notes userNote = (Notes) getSessionFactory().getCurrentSession().get(Notes.class, note.getId());
+		if(userNote!=null && userNote.getNotesUser().getEmailId().equals(note.getNotesUser().getEmailId())){
+			getSessionFactory().getCurrentSession().delete(userNote);
+		}else{
+			
+			throw new DataNotFoundException(NOTE_DELETE_UNSUCCESSFUL);
+		}
+		
+		
+		return NOTE_DELETE_SUCCESSFUL;
 	}
 
 
