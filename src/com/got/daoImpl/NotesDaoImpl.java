@@ -2,6 +2,8 @@ package com.got.daoImpl;
 
 import java.util.List;
 
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,6 +14,16 @@ import com.got.model.Notes;
 @Transactional
 public class NotesDaoImpl implements NotesDao{
 
+	
+	private SessionFactory sessionFactory;
+	
+	@Autowired
+	public NotesDaoImpl(SessionFactory sessionFactory){
+		
+		this.sessionFactory = sessionFactory;
+		
+	}
+	
 	@Override
 	public String addNote() {
 		// TODO Auto-generated method stub
@@ -34,6 +46,14 @@ public class NotesDaoImpl implements NotesDao{
 	public List<Notes> getNotesForUser() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
+
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
 	}
 
 }
