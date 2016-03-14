@@ -13,4 +13,5 @@ public interface AppllcationConstant {
 	public static final String NOTE_UPDATE_UNSUCCESSFUL ="Note not found for given id with the user";
 	public static final String NOTE_DELETE_SUCCESSFUL ="Note was deleted";
 	public static final String NOTE_DELETE_UNSUCCESSFUL ="Note not found for given id with the user";
+	public static final String NOTE_SIZE_CONSTRAINT ="Note Tile and Content size should be within specified limits ";
 }

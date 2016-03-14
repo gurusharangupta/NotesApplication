@@ -16,7 +16,7 @@ public class GenericExceptionMapper implements ExceptionMapper<Throwable>{
 	@Override
 	public Response toResponse(Throwable ex) {
 		// TODO Auto-generated method stub
-		ErrorMessage errorMessage = new ErrorMessage("Internal Server Error",500,"http://www.gotprint.com");
+		ErrorMessage errorMessage = new ErrorMessage(ex.getMessage(),500,"http://www.gotprint.com");
 		return Response.status(Status.INTERNAL_SERVER_ERROR)
 				.entity(errorMessage)
 				.build();

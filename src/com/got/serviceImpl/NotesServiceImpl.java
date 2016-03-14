@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.got.constant.AppllcationConstant;
 import com.got.dao.NotesDao;
 import com.got.model.Notes;
 import com.got.model.User;
@@ -14,7 +15,7 @@ import com.got.service.NotesService;
 
 @Service
 @Transactional(rollbackFor=Throwable.class,readOnly=false)
-public class NotesServiceImpl implements NotesService{
+public class NotesServiceImpl implements NotesService,AppllcationConstant{
 
 	private NotesDao notesDao;
 	
@@ -27,7 +28,7 @@ public class NotesServiceImpl implements NotesService{
 	
 	@Override
 	public String addNote(Notes note) {
-		
+		checkNoteSize(note);
 		Date date = new Date();
 		note.setCreateTime(date);
 		note.setUpdateTime(date);
@@ -36,8 +37,18 @@ public class NotesServiceImpl implements NotesService{
 		return notesDao.addNote(note);
 	}
 
+	private void checkNoteSize(Notes note) {
+		
+		if(note.getTitle().length()>50 || note.getNote().length()>1000){
+			throw new RuntimeException(NOTE_SIZE_CONSTRAINT);
+		}
+		
+	}
+
+
 	@Override
 	public String updateNote(Notes note) {
+		checkNoteSize(note);
 		Date date = new Date();
 		note.setUpdateTime(date);
 		return notesDao.updateNote(note);
