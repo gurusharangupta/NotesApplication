@@ -1,10 +1,14 @@
 package com.got.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -17,25 +21,31 @@ public class User {
 	private String password;
 	private Date createTime;
 	private Date updateTime;
+	private List<Notes> userNotes = new ArrayList<Notes>();
 	
 	
 	@Id
-	@Column(name="USER_EMAIL_ID")
+	@Column(name="USER_EMAIL_ID",nullable=false)
 	public String getEmailId() {
 		return emailId;
 	}
 	
-	@Column(name="USER_PASSWORD")
+	@Column(name="USER_PASSWORD",nullable=false)
 	public String getPassword() {
 		return password;
 	}
-	@Column(name="USER_CREATE_TIME")
+	@Column(name="USER_CREATE_TIME",nullable=false)
 	public Date getCreateTime() {
 		return createTime;
 	}
-	@Column(name="USER_UPDATE_TIME")
+	@Column(name="USER_UPDATE_TIME",nullable=true)
 	public Date getUpdateTime() {
 		return updateTime;
+	}
+	
+	@OneToMany(cascade=CascadeType.PERSIST, mappedBy="notesUser")
+	public List<Notes> getUserNotes() {
+		return userNotes;
 	}
 	
 	public void setEmailId(String emailId) {
@@ -49,6 +59,12 @@ public class User {
 	}
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
+	}
+
+
+
+	public void setUserNotes(List<Notes> userNotes) {
+		this.userNotes = userNotes;
 	}
 	
 }

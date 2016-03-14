@@ -1,15 +1,19 @@
 package com.got.daoImpl;
 
+import java.util.List;
+
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.got.constant.AppllcationConstant;
 import com.got.dao.UserDao;
 import com.got.model.User;
 
 
 @Repository
-public class UserDaoImpl implements UserDao {
+public class UserDaoImpl implements UserDao,AppllcationConstant {
 
 private SessionFactory sessionFactory;
 	
@@ -24,8 +28,15 @@ private SessionFactory sessionFactory;
 	
 	@Override
 	public User checkUser(User user) {
-		// TODO Auto-generated method stub
-		return null;
+		Query query =  getSessionFactory().getCurrentSession().createQuery("from User where userEmailId=?");
+		query.setString(0, user.getEmailId());
+		 List<User> list =  query.list();
+		 if(!list.isEmpty()){
+			 return list.get(0);
+		 }else{
+			 return null;
+		 }
+		
 	}
 	
 	
