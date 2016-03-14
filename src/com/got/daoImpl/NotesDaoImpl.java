@@ -15,7 +15,7 @@ import com.got.model.Notes;
 import com.got.model.User;
 
 @Repository
-@Transactional
+
 public class NotesDaoImpl implements NotesDao,AppllcationConstant{
 
 	
@@ -39,8 +39,12 @@ public class NotesDaoImpl implements NotesDao,AppllcationConstant{
 
 	@Override
 	public String updateNote(Notes note) {
-		// TODO Auto-generated method stub
-		return null;
+		Notes userNote = (Notes) getSessionFactory().getCurrentSession().get(Notes.class, note.getId());
+		userNote.setNote(note.getNote());
+		userNote.setTitle(note.getTitle());
+		userNote.setUpdateTime(note.getUpdateTime());
+		
+		return NOTE_UPDATE_SUCCESSFUL;
 	}
 
 

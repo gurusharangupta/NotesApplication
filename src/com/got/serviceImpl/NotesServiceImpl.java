@@ -13,7 +13,7 @@ import com.got.model.User;
 import com.got.service.NotesService;
 
 @Service
-@Transactional(rollbackFor=Throwable.class)
+@Transactional(rollbackFor=Throwable.class,readOnly=false)
 public class NotesServiceImpl implements NotesService{
 
 	private NotesDao notesDao;
@@ -38,8 +38,9 @@ public class NotesServiceImpl implements NotesService{
 
 	@Override
 	public String updateNote(Notes note) {
-		// TODO Auto-generated method stub
-		return null;
+		Date date = new Date();
+		note.setUpdateTime(date);
+		return notesDao.updateNote(note);
 	}
 
 	@Override
