@@ -1,6 +1,7 @@
 1. Please create gotprint schema in your mysql db
 2. Update username and password in applicationcontex.xml of your mysql db
 3. Please insert entries into your user table
+gurusharan Guta
 
 	eg. insert into USER_DETAILS VALUES('guru@gmail.com',now(),'guru',now());
 
